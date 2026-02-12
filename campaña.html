@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registro de Simpatizantes</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: 
+        linear-gradient(135deg, rgba(251,233,231,0.7), rgba(255,253,231,0.7)),
+        url("logo.jpeg") no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+}
+
+
+    .contenedor {
+        max-width: 500px;
+        margin: 30px auto;
+        background: #ffffff;
+        padding: 25px;
+        border-radius: 14px;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    }
+
+    .logo {
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .logo img {
+        max-width: 150px;
+    }
+
+    h2 {
+        text-align: center;
+        color: #c62828;
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: bold;
+        font-size: 20px;
+        color: #444;
+        display: block;
+        margin-top: 10px;
+    }
+
+    input {
+        width: 100%;
+        padding: 12px;
+        margin-top: 5px;
+        margin-bottom: 14px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 20px;
+    }
+
+    input:focus {
+        border-color: #f9a825;
+        outline: none;
+    }
+
+    button {
+        width: 100%;
+        padding: 14px;
+        background: #c62828;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #b71c1c;
+    }
+
+    @media (min-width: 768px) {
+        .contenedor {
+            max-width: 600px;
+        }
+    }
+
+    #exportarExcel {
+        width: 100%;
+        padding: 14px;
+        background: #2e7d32; /* Verde */
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    #exportarExcel:hover {
+        background: #1b5e20;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="contenedor">
+
+    <!-- LOGOTIPO -->
+    <div class="logo">
+        <img src="logo.jpeg" alt="Logotipo del Partido">
+    </div>
+
+    <h2>Formulario de Simpatizantes</h2>
+
+    <form action="guardar.php" method="POST">
+
+        <label>Nombre</label>
+        <input type="text" name="nombre" required>
+
+        <label>Apellidos</label>
+        <input type="text" name="apellidos" required>
+
+        <label>Colonia</label>
+        <input type="text" name="colonia" required>
+
+        <label>Clave de Elector</label>
+        <input type="text" name="clave_elector" required>
+
+        <label>Teléfono</label>
+        <input type="tel" name="telefono" required>
+
+        <label>Estado</label>
+        <input type="text" name="estado" required>
+
+        <label>Municipio</label>
+        <input type="text" name="municipio" required>
+
+        <label>Sección</label>
+        <input type="text" name="seccion" required>
+
+        <label>Localidad</label>
+        <input type="text" name="localidad" required>
+
+        <label>Comunidad</label>
+        <input type="text" name="comunidad" required>
+
+        <label>Distrito</label>
+        <input type="text" name="distrito" required>
+
+        <label>Fecha de Registro</label>
+        <input type="date" name="fecha_registro" required>
+
+        <button type="submit">Registrar</button>
+        <button type="button" id="exportarExcel">Exportar a Excel</button>
+
+    </form>
+
+</div>
+
+<script>
+document.getElementById("exportarExcel").addEventListener("click", function() {
+    window.location.href = "exportar_excel.php";
+});
+</script>
+
+<script>
+document.getElementById("exportarExcel").addEventListener("click", function() {
+    window.location.href = "exportar_excel.php";
+});
+
+// Función de alerta flotante
+function alertBox(mensaje, tipo) {
+    const box = document.createElement("div");
+    box.innerText = mensaje;
+    box.style.position = "fixed";
+    box.style.top = "20px";
+    box.style.right = "20px";
+    box.style.padding = "15px 20px";
+    box.style.borderRadius = "8px";
+    box.style.color = "#fff";
+    box.style.fontSize = "18px";
+    box.style.zIndex = "9999";
+    box.style.boxShadow = "0 4px 10px rgba(0,0,0,0.2)";
+    
+    if (tipo === "success") {
+        box.style.background = "#2e7d32"; // verde
+        box.innerText = "✔ " + mensaje;
+    } else {
+        box.style.background = "#c62828"; // rojo
+        box.innerText = "✖ " + mensaje;
+    }
+
+    document.body.appendChild(box);
+
+    setTimeout(() => {
+        box.remove();
+    }, 3000);
+}
+
+// Leer parámetros de la URL
+const urlParams = new URLSearchParams(window.location.search);
+const mensaje = urlParams.get("mensaje");
+const tipo = urlParams.get("tipo");
+
+if (mensaje && tipo) {
+    alertBox(mensaje, tipo);
+}
+</script>
+
+
+</body>
+</html>
